@@ -1,0 +1,6 @@
+framework module Pods_bicicletasSeguras {
+  umbrella header "Pods-bicicletasSeguras-umbrella.h"
+
+  export *
+  module * { export * }
+}

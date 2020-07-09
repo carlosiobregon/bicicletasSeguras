@@ -1,5 +1,5 @@
 //
-//  PopUpViewController.swift
+//  AlertBlockViewController.swift
 //  Copa Airlines
 //
 //  Created by Fredy Mauricio Navarrete Molano on 3/28/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PopUpViewController: UIViewController {
+class AlertBlockViewController: UIViewController {
     
 //    MARK: - UI Elements
     @IBOutlet weak var popUpContainer: UIView! {
@@ -19,33 +19,26 @@ class PopUpViewController: UIViewController {
     }
     @IBOutlet weak var titleLabel: UILabel!
     
-    @IBOutlet weak var logOutButton: UIButton!
+    @IBOutlet weak var blockButton: UIButton!
     @IBOutlet weak var topCloseButton: UIButton!
     
     @IBOutlet weak var phoneImageView: UIImageView!
     
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    
 //    MARK: - Atributes
-    var bikeUser: BikeUser?
+    var bike: Bike?
+    var delegate: PopUpBikeViewControllerDelegate?
     
 //    MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let user = bikeUser else { return }
-        nameLabel.text = user.name
-        emailLabel.text = user.email
-        if let bikes = user.bikes, bikes.count > .zero {
-            descriptionLabel.text = "\(bikes.count) bicicletas asociadas"
-        } else {
-            descriptionLabel.text = "No tiene bicicletas asociadas"
-        }
+        
     }
     
 //    MARK: - Actions
-    @IBAction func logOutClick(_ sender: Any) {
+    @IBAction func onBlockClick(_ sender: Any) {
+        if let bike = self.bike {
+            delegate?.onAlertBikeClick(bike: bike)
+        }
         self.dismiss(animated: true, completion: nil)
     }
     

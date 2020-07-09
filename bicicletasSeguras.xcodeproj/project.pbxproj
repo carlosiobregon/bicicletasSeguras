@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		CED89B610419CC2AA6EFC24D /* Pods_bicicletasSeguras.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37082C6097A597798F4EA2E1 /* Pods_bicicletasSeguras.framework */; };
+		D2B4B20224B6496D00AC07FD /* BikeUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B4B20124B6496D00AC07FD /* BikeUser.swift */; };
+		D2B4B20424B69B3A00AC07FD /* PopUpBikeViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B4B20324B69B3A00AC07FD /* PopUpBikeViewControllerDelegate.swift */; };
+		D2B4B20624B69BD600AC07FD /* Bike.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B4B20524B69BD600AC07FD /* Bike.swift */; };
+		D2B4B20824B71E8B00AC07FD /* AlertBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B4B20724B71E8B00AC07FD /* AlertBlockViewController.swift */; };
 		D2B8F75D24AED73600AA76BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D2B8F75C24AED73600AA76BD /* GoogleService-Info.plist */; };
 		D2D80B1124B42EEA00E76702 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D80B1024B42EEA00E76702 /* SceneDelegate.swift */; };
 		D2F0C87924B4FACA00CFD47C /* BikeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F0C87824B4FACA00CFD47C /* BikeListViewController.swift */; };
@@ -23,6 +27,10 @@
 /* Begin PBXFileReference section */
 		2F9F7303C0A7367D06DF4EB9 /* Pods-bicicletasSeguras.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bicicletasSeguras.debug.xcconfig"; path = "Target Support Files/Pods-bicicletasSeguras/Pods-bicicletasSeguras.debug.xcconfig"; sourceTree = "<group>"; };
 		37082C6097A597798F4EA2E1 /* Pods_bicicletasSeguras.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bicicletasSeguras.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2B4B20124B6496D00AC07FD /* BikeUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeUser.swift; sourceTree = "<group>"; };
+		D2B4B20324B69B3A00AC07FD /* PopUpBikeViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpBikeViewControllerDelegate.swift; sourceTree = "<group>"; };
+		D2B4B20524B69BD600AC07FD /* Bike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bike.swift; sourceTree = "<group>"; };
+		D2B4B20724B71E8B00AC07FD /* AlertBlockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertBlockViewController.swift; sourceTree = "<group>"; };
 		D2B8F75C24AED73600AA76BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D2D80B1024B42EEA00E76702 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D2F0C87824B4FACA00CFD47C /* BikeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeListViewController.swift; sourceTree = "<group>"; };
@@ -75,13 +83,17 @@
 				D2FDED8F24A2FF1200606FDC /* AppDelegate.swift */,
 				D2FDED9324A2FF1200606FDC /* LoginViewController.swift */,
 				D2F0C87824B4FACA00CFD47C /* BikeListViewController.swift */,
+				D2B4B20324B69B3A00AC07FD /* PopUpBikeViewControllerDelegate.swift */,
 				D2F0C87A24B585AE00CFD47C /* PopUpViewController.swift */,
+				D2B4B20724B71E8B00AC07FD /* AlertBlockViewController.swift */,
 				D2F0C87C24B58CF900CFD47C /* PopUpBikeViewController.swift */,
 				D2FDED9524A2FF1200606FDC /* Main.storyboard */,
 				D2FDED9824A2FF1400606FDC /* Assets.xcassets */,
 				D2FDED9A24A2FF1400606FDC /* LaunchScreen.storyboard */,
 				D2FDED9D24A2FF1400606FDC /* Info.plist */,
 				D2B8F75C24AED73600AA76BD /* GoogleService-Info.plist */,
+				D2B4B20124B6496D00AC07FD /* BikeUser.swift */,
+				D2B4B20524B69BD600AC07FD /* Bike.swift */,
 			);
 			path = bicicletasSeguras;
 			sourceTree = "<group>";
@@ -220,11 +232,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2F0C87B24B585AE00CFD47C /* PopUpViewController.swift in Sources */,
+				D2B4B20424B69B3A00AC07FD /* PopUpBikeViewControllerDelegate.swift in Sources */,
 				D2FDED9424A2FF1200606FDC /* LoginViewController.swift in Sources */,
+				D2B4B20224B6496D00AC07FD /* BikeUser.swift in Sources */,
 				D2F0C87924B4FACA00CFD47C /* BikeListViewController.swift in Sources */,
+				D2B4B20624B69BD600AC07FD /* Bike.swift in Sources */,
 				D2FDED9024A2FF1200606FDC /* AppDelegate.swift in Sources */,
 				D2F0C87D24B58CF900CFD47C /* PopUpBikeViewController.swift in Sources */,
 				D2D80B1124B42EEA00E76702 /* SceneDelegate.swift in Sources */,
+				D2B4B20824B71E8B00AC07FD /* AlertBlockViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

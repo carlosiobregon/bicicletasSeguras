@@ -32,14 +32,57 @@ class LoginViewController: UIViewController {
         view.addSubview(loginButton)
     }
     
-    
     //MARK: - Navegation
-    func showBikeList() {
-        DispatchQueue.main.async {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "BikeListViewController") as! BikeListViewController
-            self.show(vc, sender: nil)
+    func showBikeList(bikeUser: BikeUser) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "BikeListViewController") as! BikeListViewController
+        vc.bikeUser = bikeUser
+        self.show(vc, sender: nil)
+    }
+
+    //MARK: - Database
+    func userIsAlreadyRegistered() {
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        self.ref.child("Users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+            let user: BikeUser
+            if let value = snapshot.value as? NSDictionary,
+                let name = value["fullname"] as? String,
+                let email = value["email"] as? String {
+                let bikes: [Bike]?
+                if let dictBikes = value["bikes"] as? [String:Any] {
+                    bikes = self.getBikes(bikes:  dictBikes)
+                } else { bikes = nil }
+                user = BikeUser(userId: userID ,name: name, email: email, bikes: bikes)
+            } else if let name = Auth.auth().currentUser?.displayName,
+                let email = Auth.auth().currentUser?.email {
+                user = BikeUser(userId: userID ,name: name, email: email, bikes: nil)
+                self.userRegister(bikeUser: user)
+            } else { return }
+            DispatchQueue.main.async {
+                self.showBikeList(bikeUser: user)
+            }
+        }) { (error) in
+            print(error.localizedDescription)
         }
+    }
+    
+    func getBikes(bikes: [String:Any]) -> [Bike] {
+        var bikesArray:[Bike] = Array()
+        for bike in bikes {
+            let attributes = bike.value as! Dictionary<String, String>
+            print(attributes)
+            let idSecure = attributes["id_device"] ?? ""
+            let brandmark = attributes["brand"] ?? ""
+            let color = attributes["color"] ?? ""
+            let bike = Bike(idBike: bike.key, idSecure: idSecure, brandmark: brandmark, color: color)
+            bikesArray.append(bike)
+        }
+        return bikesArray
+    }
+    
+    func userRegister(bikeUser: BikeUser) {
+        self.ref.child("Users").child(bikeUser.userId).setValue(["fullname": bikeUser.name,
+                                                                 "email" : bikeUser.email])
     }
     
     //MARK: - Auth Firebase
@@ -57,28 +100,6 @@ class LoginViewController: UIViewController {
             }
             self.userIsAlreadyRegistered()
         }
-    }
-    
-    //MARK: - Database
-    func userIsAlreadyRegistered() {
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        self.ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
-            if let value = snapshot.value as? NSDictionary {
-                // Almacenar
-                print(value)
-            } else {
-                self.userRegister(userID: userID)
-            }
-            self.showBikeList()
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-    }
-    
-    func userRegister(userID: String) {
-        let name = Auth.auth().currentUser?.displayName
-        let correo = Auth.auth().currentUser?.email
-        self.ref.child("users").child(userID).setValue(["username": name ?? "anonimo", "correo" : correo ?? "noRegistra"])
     }
        
 }

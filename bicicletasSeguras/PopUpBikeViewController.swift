@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
 
 class PopUpBikeViewController: UIViewController {
     
@@ -17,47 +19,14 @@ class PopUpBikeViewController: UIViewController {
             popUpContainer.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         }
     }
-    
-    @IBOutlet weak var titleLabel: UILabel! {
-        willSet{
-            if let it = newValue{
-                
-            }
-        }
-    }
-    @IBOutlet weak var subtitleLabel: UILabel! {
-        willSet{
-            if let it = newValue{
-                
-            }
-        }
-    }
-    @IBOutlet weak var header: UIStackView! {
-        didSet {
-            header.isAccessibilityElement = true
-            
-            header.accessibilityHint = .none
-            header.accessibilityTraits = .staticText
-        }
-    }
-    
-    @IBOutlet weak var getNotificationsButton: UIButton!
-    
+    @IBOutlet weak var insuranceTextField: UITextField!
+    @IBOutlet weak var identifierTextField: UITextField!
+    @IBOutlet weak var brandTextField: UITextField!
+    @IBOutlet weak var colorTextField: UITextField!
+    @IBOutlet weak var header: UIStackView!
+    @IBOutlet weak var addBikeButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
-    
-    @IBOutlet weak var topCloseButton: UIButton! {
-        didSet {
-            topCloseButton.isAccessibilityElement = false
-            topCloseButton.accessibilityLabel = nil
-            topCloseButton.accessibilityHint = nil
-        }
-    }
-    
-    @IBOutlet weak var phoneImageView: UIImageView! {
-        didSet {
-            phoneImageView.isAccessibilityElement = false
-        }
-    }
+    @IBOutlet weak var topCloseButton: UIButton!
     
     @IBOutlet weak var notificationContentView: UIView! {
         didSet {
@@ -66,49 +35,33 @@ class PopUpBikeViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var notificationTitleLabel: UILabel! {
-        didSet {
-            notificationTitleLabel.isAccessibilityElement = false
-        }
-    }
+    @IBOutlet weak var titleLabel: UILabel!
     
-    @IBOutlet weak var notificationMessageLabel: UILabel! {
-        didSet {
-            notificationMessageLabel.isAccessibilityElement = false
-        }
-    }
-    
-//    MARK: - Atributes
-    var mustShowNativeRequest: Bool!
-    
+    var delegate: PopUpBikeViewControllerDelegate?
+   
 //    MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupAccessibility()
-        setupInterface()
-    }
-    
-    private func setupInterface() {
-        
-    }
-    
 //    MARK: - Actions
-    @IBAction func onGetNotificationsClick(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+    @IBAction func onAddBikeClick(_ sender: Any) {
+        //Validar campos esten diligenciados
+        //Armar objeto
+        guard let idBike = identifierTextField.text,
+            let idSecure = insuranceTextField.text,
+            let brandmark = brandTextField.text,
+            let color = colorTextField.text else {
+            return
+        }
         
+        let bike = Bike(idBike: idBike, idSecure: idSecure, brandmark: brandmark, color: color)
+        delegate?.onAddBikeClick(bike: bike)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func onCancelClick(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    private func setupAccessibility() {
-        view.accessibilityViewIsModal = true
-        UIAccessibility.post(notification: .screenChanged, argument: header)
     }
     
 }
